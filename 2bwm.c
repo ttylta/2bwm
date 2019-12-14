@@ -2000,8 +2000,12 @@ setborders(struct client *client,const bool isitfocused)
 
 	values[0]   = conf.focuscol;
 
-	if (!isitfocused)
-		values[0] = conf.unfocuscol;
+	if (!isitfocused) {
+      if (client->fixed)
+          values[0] = conf.fixedcol;
+      else
+          values[0] = conf.unfocuscol;
+  }
 
 	xcb_change_gc(conn, gc, XCB_GC_FOREGROUND, &values[0]);
 	xcb_poly_fill_rectangle(conn, pmap, gc, 5, rect_inner);
