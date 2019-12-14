@@ -39,8 +39,6 @@ static const uint8_t borders[] = {3,5,5,4};
  */
 #define LOOK_INTO "WM_NAME"
 static const char *ignore_names[] = {"bar", "xclock"};
-///--Menus and Programs---///
-static const char *menucmd[]   = { "", NULL };
 ///--Custom foo---///
 static void halfandcentered(const Arg *arg)
 {
@@ -177,8 +175,6 @@ static key keys[] = {
     {  MOD |SHIFT,        XK_Down,       cursor_move,       {.i=TWOBWM_CURSOR_DOWN}},
     {  MOD |SHIFT,        XK_Right,      cursor_move,       {.i=TWOBWM_CURSOR_RIGHT}},
     {  MOD |SHIFT,        XK_Left,       cursor_move,       {.i=TWOBWM_CURSOR_LEFT}},
-    // Start programs
-    {  MOD ,              XK_w,          start,             {.com = menucmd}},
     // Exit or restart 2bwm
     {  MOD |CONTROL,      XK_q,          twobwm_exit,       {.i=0}},
     {  MOD |CONTROL,      XK_r,          twobwm_restart,    {.i=0}},
@@ -198,8 +194,7 @@ static key keys[] = {
 // the last argument makes it a root window only event
 static Button buttons[] = {
     {  MOD        ,XCB_BUTTON_INDEX_1,     mousemotion,   {.i=TWOBWM_MOVE}, false},
-    {  MOD        ,XCB_BUTTON_INDEX_3,     mousemotion,   {.i=TWOBWM_RESIZE}, false},
-    {  0          ,XCB_BUTTON_INDEX_3,     start,         {.com = menucmd}, true},
+    {  MOD|CONTROL,XCB_BUTTON_INDEX_1,     mousemotion,   {.i=TWOBWM_RESIZE}, false},
     {  MOD|SHIFT,  XCB_BUTTON_INDEX_1,     changeworkspace, {.i=0}, false},
     {  MOD|SHIFT,  XCB_BUTTON_INDEX_3,     changeworkspace, {.i=1}, false},
     {  MOD|ALT,    XCB_BUTTON_INDEX_1,     changescreen,    {.i=1}, false},
